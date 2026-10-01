@@ -31,7 +31,7 @@ void setup() {
   pinMode(player1Led, OUTPUT);
   pinMode(player2Led, OUTPUT);
 
-  displayOk = display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // game still works if screen isn't found
+  displayOk = display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  
   showScreen("PRESS", "START", "");
 }
 
@@ -53,7 +53,7 @@ void loop() {
       showScreen("PLAYER 2", "WINS!", timeText);
     }
 
-    delay(5000);                          // winner's LED stays on for 5 seconds
+    delay(5000);                         
     digitalWrite(player1Led, LOW);
     digitalWrite(player2Led, LOW);
     showScreen("PRESS", "START", "");
@@ -83,13 +83,13 @@ void runLights() {
 }
 
 int waitForWinner() {
-  showScreen("GO!", "", "");              // draw first, so the screen update doesn't delay detection
-  digitalWrite(buzzerPin, HIGH);          // "GO!" starts, players can press right now
+  showScreen("GO!", "", "");             
+  digitalWrite(buzzerPin, HIGH);          
   unsigned long buzzStart = millis();
 
   while (true) {
     if (millis() - buzzStart >= 1000) {
-      digitalWrite(buzzerPin, LOW);       // buzzer ends after 1 second
+      digitalWrite(buzzerPin, LOW);       
     }
 
     if (digitalRead(player1Button) == LOW) {
@@ -111,7 +111,7 @@ void showScreen(const char* line1, const char* line2, const char* line3) {
   if (!displayOk) return;
   display.clearDisplay();
   display.setTextColor(SSD1306_WHITE);
-  display.setTextSize(2);                 // 10 characters per line at this size
+  display.setTextSize(2);                 
   display.setCursor(0, 0);
   display.println(line1);
   display.setCursor(0, 22);
